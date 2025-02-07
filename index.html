@@ -44,7 +44,7 @@
         }
     </style>
     <script>
-        function switchLanguage(lang) {
+        function setLanguage(lang) {
             if (lang === 'ru') {
                 document.getElementById('heading').innerHTML = "👋 Привет! Мы планируем запустить магазин прокси и хотим сделать их максимально удобными для вас.<br>Заполните короткий опрос (2-3 минуты) и получите скидку на первый заказ!";
                 document.getElementById('survey-button').innerText = "Пройти опрос";
@@ -55,12 +55,23 @@
                 document.getElementById('proxy-button').innerText = "Get Proxy Now";
             }
         }
+        
+        function detectLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            if (userLang.startsWith('ru')) {
+                setLanguage('ru');
+            } else {
+                setLanguage('en');
+            }
+        }
+        
+        window.onload = detectLanguage;
     </script>
 </head>
 <body>
     <div class="language-switch">
-        <button onclick="switchLanguage('en')">🇺🇸English</button>
-        <button onclick="switchLanguage('ru')">🇷🇺Русский</button>
+        <button onclick="setLanguage('en')">English</button>
+        <button onclick="setLanguage('ru')">Русский</button>
     </div>
     <h1 id="heading">
         👋 Hi! We are launching a proxy store and want to make our services as convenient as possible for you.<br>
